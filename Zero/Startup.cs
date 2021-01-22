@@ -13,6 +13,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Zero.Server;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Zero.Core.IServices;
+using Zero.Server.Repository;
+
 namespace Zero
 {
     public class Startup
@@ -30,13 +34,47 @@ namespace Zero
 
             services.AddControllers();
 
+            #region Swagger≈‰÷√
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Zero", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Zero-Management-system",
+                    Version = "v1",
+                    Description = "Built by Dotnet5",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Yingfea",
+                        Email = "yingfea@gmail.com",
+                        Url = new Uri("https://yingfea.top")
+                    },
+                }); ;
             });
-            services.AddDbContext<ZeroDBContext>(options=> {
-                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
+            #endregion
+
+            #region SqlServer≈‰÷√
+            //services.AddDbContext<ZeroDBContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
+            //});
+            #endregion
+
+            #region MySql≈‰÷√
+            services.AddDbContext<ZeroDBContext>(options =>
+            {
+                options.UseMySql(Configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 23)), mySqlOptions =>
+                {
+                    mySqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend);
+                    mySqlOptions.MigrationsAssembly("Zero");
+                }).EnableSensitiveDataLogging(false)
+                  .EnableDetailedErrors();
             });
+            #endregion
+
+            #region ◊¢»Î∑˛ŒÒ
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

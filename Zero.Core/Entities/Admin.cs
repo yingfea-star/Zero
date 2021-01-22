@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,13 @@ namespace Zero.Core.Entities
     /// <summary>
     /// 管理员表
     /// </summary>
-   public class Admin
+    public class Admin
     {
         [Display(Name = "编号")]
         public Guid Id { get; set; }
 
         [Display(Name = "账户")]
-        [MaxLength(16),Required(ErrorMessage ="账户不能为空")]
+        [MaxLength(16), Required(ErrorMessage = "账户不能为空")]
         public string Account { get; set; }
 
         [Display(Name = "密码")]
@@ -28,6 +29,14 @@ namespace Zero.Core.Entities
         [Display(Name = "用户工号")]
         [MaxLength(16)]
         public string workNumber { get; set; }
+
+        [Display(Name = "创建时间")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreateTime { get; set; }
+
+        [Display(Name = "修改时间")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime UpdateTime { get; set; }
 
     }
 }

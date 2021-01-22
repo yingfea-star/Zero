@@ -53,5 +53,13 @@ namespace Zero.Core.Entities
         [Display(Name = "职位")]
         [DefaultValue("00000000-0000-0000-0000-000000000000")]
         public Guid Position { get; set; }
+
+        [Display(Name = "创建时间")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreateTime { get; set; }
+
+        [Display(Name = "修改时间")]
+        [DefaultValue("00000000-0000-0000-0000-000000000000")]
+        public DateTime UpdateTime { get; set; }
     }
 }

@@ -28,5 +28,9 @@ namespace Zero.Core.IServices
         #region 删除用户信息
         Task<int> Delete(List<string> Codes);
         #endregion
+
+        #region Login
+        Task<int> Login(string Account,string Password);
+        #endregion
     }
 }

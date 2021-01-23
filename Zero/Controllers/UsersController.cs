@@ -22,6 +22,12 @@ namespace Zero.Controllers
             _IUserServer = userServer ?? throw new ArgumentNullException(nameof(userServer));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] string Account, string Password) {
+
+            return new JsonResult(new { Code= await _IUserServer.Login(Account, Password)>0?200:401});
+        }
+
         [HttpGet]
         public async Task<IEnumerable<User>> GetUsers(string Code = "")
         {

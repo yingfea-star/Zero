@@ -70,5 +70,10 @@ namespace Zero.Infrastructure.Services
             }
             return await _ZeroDBContext.User.Where(x => EF.Functions.Contains(x.Account, Code) || EF.Functions.Contains(x.NickName,Code)).ToListAsync();
         }
+
+        public async Task<int> IUserServer.Login(string Account, string Password)
+        {
+           return await _ZeroDBContext.User.Where(x => x.Account.Equals(Account) && x.Password.Equals(Password)).CountAsync()
+        }
     }
 }

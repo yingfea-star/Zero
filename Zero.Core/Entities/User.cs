@@ -17,49 +17,48 @@ namespace Zero.Core.Entities
         [Display(Name = "Guid")]
         public Guid Id { get; set; }
 
-        [Display(Name = "员工编号")]
-        [MaxLength(16), Required(ErrorMessage = "员工编号为必填项")]
+        [Display(Name = "用户编号")]
+        [MaxLength(16), Required(ErrorMessage = "用户编号为必填项")]
         public string No { get; set; }
 
+        [Display(Name = "账户")]
+        [MaxLength(16), Required(ErrorMessage = "账户为必填项")]
+        public string Account { get; set; }
 
-        [Display(Name = "员工姓名")]
-        [MaxLength(16), Required(ErrorMessage = "员工姓名为必填项")]
-        public string Name { get; set; }
+        [Display(Name = "密码")]
+        [MaxLength(16), Required(ErrorMessage = "账户为必填项")]
+        public string Password { get; set; }
+
+        [Display(Name = "用户昵称")]
+        [MaxLength(16), Required(ErrorMessage = "用户昵称为必填项")]
+        public string NickName { get; set; }
+
+        [Display(Name = "头像")]
+        [MaxLength(255)]
+        public string ProfliePhoto { get; set; }
 
         [Display(Name = "出生日期")]
-        [Required(ErrorMessage = "员工姓名为必填项"), Column(TypeName = "date")]
+        [Column(TypeName = "date")]
         public DateTime birthday { get; set; }
 
-        [Display(Name = "联系方式")]
-        [MaxLength(12), Required(ErrorMessage = "员工姓名为必填项")]
-        public string Contact { get; set; }
+        [Display(Name = "QQ")]
+        [MaxLength(11)]
+        public int QQ { get; set; }
 
-        [Display(Name = "是否员工")]
-        [DefaultValue(true)]
-        public bool IsWorker { get; set; }
+        [Display(Name = "微信")]
+        [MaxLength(255)]
+        public string WeChat { get; set; }
 
-        [Display(Name = "车间")]
-        [DefaultValue("00000000-0000-0000-0000-000000000000")]
-        public Guid WorkShopId { get; set; }
-
-        [Display(Name = "部门")]
-        [DefaultValue("00000000-0000-0000-0000-000000000000")]
-        public Guid DepartmentId { get; set; }
-
-        [Display(Name = "组")]
-        [DefaultValue("00000000-0000-0000-0000-000000000000")]
-        public Guid GroupId { get; set; }
-
-        [Display(Name = "职位")]
-        [DefaultValue("00000000-0000-0000-0000-000000000000")]
-        public Guid Position { get; set; }
+        [Display(Name = "Github")]
+        [MaxLength(255)]
+        public string Github { get; set; }
 
         [Display(Name = "创建时间")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreateTime { get; set; }
 
         [Display(Name = "修改时间")]
-        [DefaultValue("00000000-0000-0000-0000-000000000000")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UpdateTime { get; set; }
     }
 }
